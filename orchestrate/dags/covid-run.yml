@@ -1,0 +1,6 @@
+my_dag:
+  start_date: 2023-01-19
+  tasks:
+    dbt_build:
+      operator: airflow.operators.bash_operator.BashOperator
+      bash_command: "source /opt/datacoves/virtualenvs/main/bin/activate && dbt-coves dbt -- build"

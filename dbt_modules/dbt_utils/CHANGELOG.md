@@ -248,14 +248,14 @@ If you were relying on the position to match up your optional arguments, this ma
 ```
 -- before: This works on previous version of dbt-utils, but on 0.7.0, the `50` would be passed through as the `order_by` argument
 {% set payment_methods = dbt_utils.get_column_values(
-        ref('stg_payments'),
+        ref('payments'),
         'payment_method',
         50
 ) %}
 
 -- after
 {% set payment_methods = dbt_utils.get_column_values(
-        ref('stg_payments'),
+        ref('payments'),
         'payment_method',
         max_records=50
 ) %}

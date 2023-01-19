@@ -558,7 +558,7 @@ This macro returns the unique values for a column in a given [relation](https://
 **Args:**
 - `table` (required): a [Relation](https://docs.getdbt.com/reference/dbt-classes#relation) (a `ref` or `source`) that contains the list of columns you wish to select from
 - `column` (required): The name of the column you wish to find the column values of
-- `where` (optional, default=`none`): A where clause to filter the column values by. 
+- `where` (optional, default=`none`): A where clause to filter the column values by.
 - `order_by` (optional, default=`'count(*) desc'`): How the results should be ordered. The default is to order by `count(*) desc`, i.e. decreasing frequency. Setting this as `'my_column'` will sort alphabetically, while `'min(created_at)'` will sort by when thevalue was first observed.
 - `max_records` (optional, default=`none`): The maximum number of column values you want to return
 - `default` (optional, default=`[]`): The results this macro should return if the relation has not yet been created (and therefore has no column values).
@@ -566,8 +566,8 @@ This macro returns the unique values for a column in a given [relation](https://
 
 **Usage:**
 ```sql
--- Returns a list of the payment_methods in the stg_payments model_
-{% set payment_methods = dbt_utils.get_column_values(table=ref('stg_payments'), column='payment_method') %}
+-- Returns a list of the payment_methods in the payments model_
+{% set payment_methods = dbt_utils.get_column_values(table=ref('payments'), column='payment_method') %}
 
 {% for payment_method in payment_methods %}
     ...
@@ -579,7 +579,7 @@ This macro returns the unique values for a column in a given [relation](https://
 ```sql
 -- Returns the list sorted alphabetically
 {% set payment_methods = dbt_utils.get_column_values(
-        table=ref('stg_payments'),
+        table=ref('payments'),
         column='payment_method',
         order_by='payment_method'
 ) %}
@@ -588,7 +588,7 @@ This macro returns the unique values for a column in a given [relation](https://
 ```sql
 -- Returns the list sorted my most recently observed
 {% set payment_methods = dbt_utils.get_column_values(
-        table=ref('stg_payments'),
+        table=ref('payments'),
         column='payment_method',
         order_by='max(created_at) desc',
         max_records=50,
@@ -1133,7 +1133,7 @@ Note: If there are instances of `delimiter_text` within your `measure`, you cann
 ```
 
 #### array_construct ([source](macros/cross_db_utils/array_construct.sql))
-This macro returns an array constructed from a set of inputs. 
+This macro returns an array constructed from a set of inputs.
 
 **Args:**
 - `inputs` (optional): The list of array contents. If not provided, this macro will create an empty array. All inputs must be the *same data type* in order to match Postgres functionality and *not null* to match Bigquery functionality.
@@ -1149,8 +1149,8 @@ This macro returns an array constructed from a set of inputs.
 This macro appends an element to the end of an array and returns the appended array.
 
 **Args:**
-- `array` (required): The array to append to. 
-- `new_element` (required): The element to be appended. This element must *match the data type of the existing elements* in the array in order to match Postgres functionality and *not null* to match Bigquery functionality. 
+- `array` (required): The array to append to.
+- `new_element` (required): The element to be appended. This element must *match the data type of the existing elements* in the array in order to match Postgres functionality and *not null* to match Bigquery functionality.
 
 **Usage:**
 ```
@@ -1161,7 +1161,7 @@ This macro appends an element to the end of an array and returns the appended ar
 This macro returns the concatenation of two arrays.
 
 **Args:**
-- `array_1` (required): The array to append to. 
+- `array_1` (required): The array to append to.
 - `array_2` (required): The array to be appended to `array_1`. This array must match the data type of `array_1` in order to match Postgres functionality.
 
 **Usage:**
@@ -1170,7 +1170,7 @@ This macro returns the concatenation of two arrays.
 ```
 
 #### cast_array_to_string ([source](macros/cross_db_utils/cast_array_to_string.sql))
-This macro converts an array to a single string value and returns the resulting string. 
+This macro converts an array to a single string value and returns the resulting string.
 
 **Args:**
 - `array` (required): The array to convert to a string.
