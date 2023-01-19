@@ -10,16 +10,16 @@ from kubernetes.client import models as k8s
 
 default_args = {
     'owner': 'airflow',
-    'email': 'sebastian@convexa.ai',
+    'email': 'pedro.folimn@fons.com.br',
     'email_on_failure': True
 }
 
 with DAG(
-    dag_id="test_pandas",
+    dag_id="schedule_covid19",
     default_args=default_args,
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
+    start_date=pendulum.datetime(2022, 1, 19, tz="UTC"),
     catchup=False,
-    tags=["sample_tag"],
+    tags=["poc_tag"],
 ) as dag:
     executor_config_template = {
         "pod_override": k8s.V1Pod(
@@ -36,7 +36,7 @@ with DAG(
     task_x = BashOperator(
         task_id="bash_executor_config",
         executor_config=executor_config_template,
-        bash_command="echo SUCCESS",
+        bash_command="dbt run",
     )
 
     fail = BashOperator(
