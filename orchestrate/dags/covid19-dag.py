@@ -36,7 +36,7 @@ with DAG(
     task_x = BashOperator(
         task_id="dbt_run",
         executor_config=executor_config_template,
-        bash_command="dbt run",
+        bash_command="echo SUCCESS",
     )
 
     fail = BashOperator(
