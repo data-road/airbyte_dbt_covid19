@@ -34,7 +34,7 @@ epidemiology_join as (
 
     select
         {{ dbt_utils.surrogate_key(['demographics._airbyte_demographics_hashid', 'economy._airbyte_economy_hashid']) }} as covid19_sk,
-        epidemiology.date,
+        date(epidemiology.date, 'AUTO'),
         epidemiology.location_key,
         iff(epidemiology.new_confirmed = 'NaN', 0, epidemiology.new_confirmed) as new_confirmed,
         iff(epidemiology.new_deceased = 'NaN', 0, epidemiology.new_deceased) as new_deceased,
